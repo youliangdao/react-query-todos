@@ -5,16 +5,18 @@ import { resetEditedTag } from '../slices/todoSlice'
 import { Tag } from '../types/types'
 
 const postTag = async (tag: Omit<Tag, 'id'>) => {
-  return await axios.post<Tag>(`${process.env.REACT_APP_REST_URL}/tags`, tag)
+  return await axios.post<Tag>(`${process.env.REACT_APP_REST_URL}/tags/`, tag)
 }
 const updateTask = async (tag: Tag) => {
   return await axios.patch<Tag>(
-    `${process.env.REACT_APP_REST_URL}/tags/${tag.id}`,
+    `${process.env.REACT_APP_REST_URL}/tags/${tag.id}/`,
     tag
   )
 }
 const deleteTask = async (id: number) => {
-  return await axios.delete<Tag>(`${process.env.REACT_APP_REST_URL}/tags/${id}`)
+  return await axios.delete<Tag>(
+    `${process.env.REACT_APP_REST_URL}/tags/${id}/`
+  )
 }
 
 export const useMutateTag = () => {
@@ -24,9 +26,9 @@ export const useMutateTag = () => {
   const createTagMutation = useMutation({
     mutationFn: postTag,
     onSuccess: (res) => {
-      const previousTags = queryClient.getQueryData<Tag[]>(['tasks'])
+      const previousTags = queryClient.getQueryData<Tag[]>(['tags'])
       if (previousTags) {
-        queryClient.setQueryData<Tag[]>(['tasks'], [...previousTags, res.data])
+        queryClient.setQueryData<Tag[]>(['tags'], [...previousTags, res.data])
       }
       dispatch(resetEditedTag())
     },
