@@ -1,7 +1,8 @@
 import { ChevronDoubleRightIcon } from '@heroicons/react/24/solid'
 import React, { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import TaskList from './TaskList'
+import TaskEditMemo from './TaskEdit'
+import TaskListMemo from './TaskList'
 
 const MainTask: FC = () => {
   const navigate = useNavigate()
@@ -19,7 +20,8 @@ const MainTask: FC = () => {
       />
       <p className="mb-10 text-xl font-bold">Tasks</p>
       <div className="grid grid-cols-2 gap-40">
-        <TaskList />
+        <TaskListMemo />
+        <TaskEditMemo />
       </div>
       <ChevronDoubleRightIcon
         onClick={() => navigate('/tags')}

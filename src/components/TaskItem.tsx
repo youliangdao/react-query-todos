@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import { useAppDispatch } from '../app/hooks'
 import { useMutateTask } from '../hooks/useMutateTask'
 import { Task } from '../types/types'
@@ -11,7 +11,7 @@ type Props = {
 const TaskItem: FC<Props> = ({ task }) => {
   const dispatch = useAppDispatch()
   const { deleteTaskMutation } = useMutateTask()
-  console.log('rendered TaskItem')
+  console.log('rendered TaskItem', task.id)
   if (deleteTaskMutation.isLoading) {
     return <p>Deleting...</p>
   }
@@ -45,5 +45,6 @@ const TaskItem: FC<Props> = ({ task }) => {
     </li>
   )
 }
+const TaskItemMemo = memo(TaskItem)
 
-export default TaskItem
+export default TaskItemMemo
