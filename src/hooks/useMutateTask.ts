@@ -6,22 +6,23 @@ import { EditTask, Task } from '../types/types'
 
 const postTask = async (task: Omit<EditTask, 'id'>) => {
   const res = await axios.post<Task>(
-    `${process.env.REACT_APP_REST_URL}/tasks`,
+    `${process.env.REACT_APP_REST_URL}/tasks/`,
     task
   )
   return res
 }
 const updateTask = async (task: EditTask) => {
   const res = await axios.patch<Task>(
-    `${process.env.REACT_APP_REST_URL}/tasks/${task.id}`,
+    `${process.env.REACT_APP_REST_URL}/tasks/${task.id}/`,
     task
   )
   return res
 }
 const deleteTask = async (id: number) => {
   const res = await axios.delete<Task>(
-    `${process.env.REACT_APP_REST_URL}/tasks/${id}`
+    `${process.env.REACT_APP_REST_URL}/tasks/${id}/`
   )
+  return res
 }
 
 export const useMutateTask = () => {
