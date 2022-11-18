@@ -14,5 +14,7 @@ export const useQueryTasks = () => {
     queryKey: ['tasks'],
     queryFn: fetchTasks,
     staleTime: 0,
+    refetchOnWindowFocus: true,
+    // refetchInterval: 5000,
   })
 }
